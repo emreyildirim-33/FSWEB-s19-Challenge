@@ -6,8 +6,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3200")
 @RestController
-@RequestMapping("/tweets")
+@RequestMapping("/tweet")
 public class TweetController {
     private final TweetService tweetService;
 
@@ -20,14 +21,29 @@ public class TweetController {
         return tweetService.findAll();
     }
 
+    @GetMapping("/findById")
+    public Tweet findById(@RequestParam long id) {
+        return tweetService.findById(id);
+    }
+
     @PostMapping
     public Tweet save(@RequestBody Tweet tweet) {
         return tweetService.save(tweet);
     }
 
-    @GetMapping("/user/{userId}")
-        public List<Tweet> findAllByUserId(@PathVariable long  userId) {
+    @PutMapping("/{id}")
+    public Tweet update(@PathVariable long id, @RequestParam long userId, @RequestBody Tweet tweet) {
+        return tweetService.update(id, tweet,userId);
+    }
+
+    @GetMapping("/findByUserId")
+        public List<Tweet> findAllByUserId(@RequestParam long  userId) {
             return tweetService.findAllByUserId(userId);
+        }
+
+        @DeleteMapping("/{id}")
+          public Tweet remove(@PathVariable long id, @RequestParam long userId) {
+             return tweetService.remove(id,userId);
         }
     }
 

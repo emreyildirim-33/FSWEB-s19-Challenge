@@ -9,5 +9,4 @@ public class FswebS19ChallengeApplication {
     public static void main(String[] args) {
         SpringApplication.run(FswebS19ChallengeApplication.class, args);
     }
-
 }

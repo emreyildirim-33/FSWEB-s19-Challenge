@@ -21,6 +21,11 @@ public class TweetService {
         return tweetRepository.findAll();
     }
 
+    public Tweet findById(Long id) {
+        return tweetRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Tweet bulunamadı! ID: " + id));
+    }
+
     public Tweet save(Tweet tweet) {
         if(tweet.getMessage() == null || tweet.getMessage().trim().isEmpty()) {
             throw new RuntimeException("Tweet içeriği boş olamaz, bir şeyler yazmalısın!");
@@ -30,5 +35,28 @@ public class TweetService {
 
     public List<Tweet> findAllByUserId(Long userId) {
         return tweetRepository.findAllByUserId(userId);
+    }
+
+    public Tweet update(Long id, Tweet updatedTweet,Long requestUserId) {
+        Tweet existingTweet = findById(id);
+
+        if(existingTweet.getUser().getId() != requestUserId) {
+            throw new RuntimeException("Hata: Sadece kendi tweetiniz güncelleyebilirsiniz!");
+        }
+        existingTweet.setMessage(updatedTweet.getMessage());
+        return tweetRepository.save(existingTweet);
+    }
+
+    public Tweet remove( Long id, Long requestUserId) {
+        Tweet foundTweet =findById(id);
+
+        if(foundTweet.getUser().getId() != requestUserId) {
+            throw new RuntimeException("Hata: Sadece kendi tweetinizi silebilirsiniz!");
+        }
+
+        tweetRepository.delete(foundTweet);
+
+        return foundTweet;
+
     }
 }
