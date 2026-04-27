@@ -37,6 +37,22 @@ public class LikeService {
         likeRecord.setTweet(tweet);
 
         return likeRecordRepository.save(likeRecord);
+
     }
+    public LikeRecord remove (Long likeId, Long requestUserId) {
+        LikeRecord likeRecord = likeRecordRepository.findById(likeId)
+                .orElseThrow(() -> new RuntimeException("Beğeni bulunamadı!"));
+
+        boolean isLikeOwner = (likeRecord.getUser().getId() == requestUserId);
+
+        if(!isLikeOwner) {
+            throw new RuntimeException("Hata: Sadece kendi beğeninizi silebilirsiniz!");
+        }
+        likeRecordRepository.delete(likeRecord);
+
+        return likeRecord;
+    }
+
+
 
 }
