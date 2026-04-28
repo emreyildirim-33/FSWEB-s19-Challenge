@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
+@CrossOrigin(origins =  "http://localhost:3200")
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -21,13 +22,18 @@ public class UserController {
         return userService.findAll();
     }
 
-    @PostMapping
+    @GetMapping("/{id}")
+    public User findById(@PathVariable long id) {
+        return userService.findById(id);
+    }
+
+    @PostMapping("/register")
     public User save(@RequestBody User user) {
         return userService.save(user);
     }
 
-    @GetMapping("/{id}")
-    public User findById(@PathVariable long id) {
-        return userService.findById(id);
+    @PostMapping("/login")
+    public String login() {
+        return "Tebrikler! Kimlik doğrulandı ve başarıyla giriş yapıldı.";
     }
 }
