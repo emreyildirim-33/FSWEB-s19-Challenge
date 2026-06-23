@@ -1,12 +1,16 @@
 # Spring Boot Twitter Clone API
 
-A full-stack Twitter clone project built with Java, Spring Boot, Spring Security, PostgreSQL, JPA, and React.
+A full-stack Twitter-like social media API project built with Java, Spring Boot, Spring Security, PostgreSQL, JPA, and React.
+
 The project focuses on RESTful API design, layered backend architecture, authentication flows, relational database modeling, validation, and frontend-backend integration.
 
 ## Overview
 
-This project simulates core Twitter-like features such as user registration, authentication, tweet creation, comments, likes, retweets, and user-based tweet retrieval.
-It was developed as a full-stack training project to practice building a real backend system with Spring Boot and connecting it to a React frontend.
+This project simulates core social media features such as user registration, authentication, tweet creation, comments, likes, retweets, and user-based tweet retrieval.
+
+The main goal is to demonstrate how a Spring Boot backend can manage user-generated content, authentication-related flows, relational data models, and API communication with a React frontend.
+
+The application includes backend services for tweets, comments, likes, retweets, and user operations, supported by a layered architecture and relational database structure.
 
 ## Tech Stack
 
@@ -48,7 +52,7 @@ It was developed as a full-stack training project to practice building a real ba
 * Layered backend structure using controller, service, repository, and entity layers
 * Relational data modeling with PostgreSQL and JPA
 * Validation and centralized exception handling
-* React frontend integration for testing backend functionality
+* React frontend integration for backend API interaction
 * CORS configuration for frontend-backend communication
 
 ## Backend Architecture
@@ -65,7 +69,7 @@ Repository Layer
 Entity / Database Layer
 ```
 
-This structure helps keep request handling, business logic, database operations, and data models separated and easier to maintain.
+This structure keeps request handling, business logic, database operations, and data models separated and easier to maintain.
 
 ## Main API Endpoints
 
@@ -129,16 +133,16 @@ twitter-front/
  └── React frontend application
 ```
 
-## What I Practiced
+## What This Project Demonstrates
 
 * Designing RESTful APIs with Spring Boot
 * Implementing controller-service-repository architecture
 * Modeling relational database entities with JPA
 * Managing user, tweet, comment, like, and retweet relationships
-* Applying validation rules and exception handling
+* Applying validation rules and centralized exception handling
 * Using Spring Security for authentication-related flows
 * Connecting a React frontend to a Spring Boot backend
-* Handling CORS issues between frontend and backend
+* Handling CORS configuration between frontend and backend
 * Structuring a full-stack project for maintainability
 
 ## Getting Started
@@ -154,14 +158,14 @@ Make sure you have the following installed:
 
 ### Backend Setup
 
-1. Clone the repository:
+Clone the repository:
 
 ```bash
 git clone https://github.com/emreyildirim-33/spring-boot-twitter-clone.git
 cd spring-boot-twitter-clone
 ```
 
-2. Configure PostgreSQL database settings in `application.properties`.
+Configure PostgreSQL database settings in `application.properties`.
 
 Example:
 
@@ -172,7 +176,7 @@ spring.datasource.password=your_password
 spring.jpa.hibernate.ddl-auto=update
 ```
 
-3. Run the backend:
+Run the backend:
 
 ```bash
 ./mvnw spring-boot:run
@@ -186,19 +190,19 @@ http://localhost:3000
 
 ### Frontend Setup
 
-1. Go to the frontend folder:
+Go to the frontend folder:
 
 ```bash
 cd twitter-front
 ```
 
-2. Install dependencies:
+Install dependencies:
 
 ```bash
 npm install
 ```
 
-3. Start the frontend:
+Start the frontend:
 
 ```bash
 npm start
@@ -212,8 +216,9 @@ You can also test the endpoints using Postman or similar tools.
 
 ## Notes
 
-This project was developed as a hands-on full-stack training project.
-The main focus was not cloning Twitter visually, but practicing backend architecture, REST API design, relational data modeling, authentication flow, and frontend-backend communication.
+This project focuses on backend architecture, REST API design, relational data modeling, authentication-related flows, and frontend-backend communication.
+
+The main purpose is to demonstrate full-stack API development and social media style backend logic rather than building a complete production social media platform.
 
 ## Repository
 
