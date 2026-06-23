@@ -1,50 +1,220 @@
-# FSWEB-s19-Challenge
+# Spring Boot Twitter Clone API
 
-Twitter Api
+A full-stack Twitter clone project built with Java, Spring Boot, Spring Security, PostgreSQL, JPA, and React.
+The project focuses on RESTful API design, layered backend architecture, authentication flows, relational database modeling, validation, and frontend-backend integration.
 
-Hedef:
+## Overview
 
-  Bu projenini amacı Spring Boot ile ilgili öğrendiğimiz tüm konuları Pratik etmek amacıyla bir Backend projesi tasarlamaktır.
-  Amacımız Twitter uygulamasını biz yazsaydık nasıl yazardık ? Nelere dikkat ederdik Design ve Implementation kısımlarını nasıl yapardık bunu test etmektir.
+This project simulates core Twitter-like features such as user registration, authentication, tweet creation, comments, likes, retweets, and user-based tweet retrieval.
+It was developed as a full-stack training project to practice building a real backend system with Spring Boot and connecting it to a React frontend.
 
-# Fonksiyonel Zorunluluklar
+## Tech Stack
 
-- Proje Spring Boot teknolojisi kullanarak dizayn edilecektir. Veritabanı olarak PostgreSQL kullanılacaktır.
-- Endpoints:
+### Backend
 
-    ### EASY
-     *  http://localhost:3000/tweet[POST] => Tweet oluşturma ve veritabanına kaydetme. Tweet'in hangi kullanıcıya ait olduğu mutlaka tutulmalıdır. Anonym tweetler olmamalıdır.
-     *  http://localhost:3000/tweet/findByUserId[GET] => Bir kullanıcının tüm tweetlerini getirmelidir.
-     *  http://localhost:3000/tweet/findById[GET] => Bir tweet için tüm bilgilerini getirmelidir.
-     *  http://localhost:3000/tweet/:id[PUT] => Bir tweet üzerinde değiştirelecek kısımları update etmek için kullanılmalıdır.
-     *  http://localhost:3000/tweet/:id[DELETE] => Id bilgisi verilen tweeti silmek için kullanılır.(Sadece tweet sahibi ilgili tweeti silebilimelidir.)
+* Java
+* Spring Boot
+* Spring Security
+* Spring Data JPA
+* PostgreSQL
+* Maven
+* REST API
+* Validation
+* Global Exception Handling
 
-    ### MEDIUM
-     * http://localhost:3000/comment/[POST] => Bir tweete bir kullanıcı tarafından yorum yazılmasını sağlar.
-     * http://localhost:3000/comment/:id[PUT] => Bir tweete bir kullanıcı tarafından yapılan yorumun update edilmesine olanak sağlar.
-     * http://localhost:3000/comment/:id[DELETE] => Bir tweete bir kullanıcı tarafından yapılan yorumun silinmesini sağlar(Sadece tweet sahibi veya yorum sahibi ilgili yorumu silebilmelidir).
-     * http://localhost:3000/like/[POST] => Bir tweete bir kullanıcı tarafından like atılmasını sağlar.
-     *  http://localhost:3000/dislike/[POST] => Bir tweete bir kullanıcı tarafından like atıldıysa bunun silinmesini sağlar.
-	
-    ### HARD
-     * http://localhost:3000/retweet/[POST] => Bir tweetin bir kullanıcı tarafından retweet edilmesini sağlar.(Twitter üzerinden retweet özelliğini test ediniz.)
-     * http://localhost:3000/retweet/:id[DELETE] => Retweet edilmiş bir tweetin silinmesi sağlanmalıdır.    
+### Frontend
 
-# Mimari Zorunluluklar
+* React
+* JavaScript
+* CSS
+* API integration with backend services
 
- - Apimizi hazırlarkan öncelikle tweet, user, comment, like, retweet gibi özellikleri ekleyebilmek adına veritabanımızın nasıl olması gerektiği ile ilgili bir hazırlık yapmalıyız.
-   Veritabanı dizaynı proje için yapmamız gereken ilk adım.
- - Controller/Service/Repository/Entity katmanlı mimarisi üzerinde sisteminizi dizayn etmelisiniz. 
- - Sisteminiz için tek bir merkezden Global Exception Handling yapmanız beklenmektedir.
- - Sisteminizde Entity katmanınız üzerinde veritabanınıza gidecek olan fieldlar için validasyon yapmış olmanız beklenmektedir.
- - Dependency Injection kurallarına uymalısınız.
- - Yukarda bahsedilen endpointler dışında /register ve /login isminde 2 tane daha endpointiniz olmalı ve security katmanını Spring Security kullanarak yönetmelisiniz.
- - Projenizde yazılmış fonksiyonları %30'u için Unit Test yazmanız baklenmektedir.
+### Tools
 
+* Git & GitHub
+* Postman / HTTP client
+* Maven Wrapper
+* PostgreSQL
 
-# FullStack Developer Muscles:
+## Features
 
-  - Twitter Api için bir React ön yüzü oluşturunuz. Bu React ön yüzünün çok detaylı olmasına gerek yoktur. Mesela kullanıcının tüm tweetlerini ekrana basan bir component dizaynı yapılabilir.
-  - Burada amacımız CORS hatası denilen bir problemi gözlemleyip bunun çözümünü tecrübe etmektir. React uygulamanızı 3200 portundan ayağa kaldırınız. 
-  - Component'iniz üzerinde kendi yazdığınız endpointlerden biri olan http://localhost:3000/tweet/findByUserId adresine get requesti atınız. Gelen tweetleri ekrana bastırınız.
-  - Karşılaştığınız CORS hatasını nasıl çözersiniz ?
+* User registration and login flows
+* Tweet creation, update, deletion, and retrieval
+* Retrieve tweets by user ID
+* Retrieve tweet details by tweet ID
+* Comment creation, update, and deletion
+* Like and unlike functionality
+* Retweet creation and removal
+* Layered backend structure using controller, service, repository, and entity layers
+* Relational data modeling with PostgreSQL and JPA
+* Validation and centralized exception handling
+* React frontend integration for testing backend functionality
+* CORS configuration for frontend-backend communication
+
+## Backend Architecture
+
+The backend follows a layered architecture:
+
+```text
+Controller Layer
+↓
+Service Layer
+↓
+Repository Layer
+↓
+Entity / Database Layer
+```
+
+This structure helps keep request handling, business logic, database operations, and data models separated and easier to maintain.
+
+## Main API Endpoints
+
+### Tweet Endpoints
+
+| Method | Endpoint              | Description              |
+| ------ | --------------------- | ------------------------ |
+| POST   | `/tweet`              | Create a new tweet       |
+| GET    | `/tweet/findByUserId` | Get all tweets by a user |
+| GET    | `/tweet/findById`     | Get tweet details by ID  |
+| PUT    | `/tweet/{id}`         | Update an existing tweet |
+| DELETE | `/tweet/{id}`         | Delete a tweet           |
+
+### Comment Endpoints
+
+| Method | Endpoint        | Description              |
+| ------ | --------------- | ------------------------ |
+| POST   | `/comment`      | Add a comment to a tweet |
+| PUT    | `/comment/{id}` | Update a comment         |
+| DELETE | `/comment/{id}` | Delete a comment         |
+
+### Like Endpoints
+
+| Method | Endpoint   | Description                |
+| ------ | ---------- | -------------------------- |
+| POST   | `/like`    | Like a tweet               |
+| POST   | `/dislike` | Remove a like from a tweet |
+
+### Retweet Endpoints
+
+| Method | Endpoint        | Description      |
+| ------ | --------------- | ---------------- |
+| POST   | `/retweet`      | Retweet a tweet  |
+| DELETE | `/retweet/{id}` | Remove a retweet |
+
+### Authentication Endpoints
+
+| Method | Endpoint    | Description                   |
+| ------ | ----------- | ----------------------------- |
+| POST   | `/register` | Register a new user           |
+| POST   | `/login`    | Authenticate an existing user |
+
+## Project Structure
+
+```text
+src/
+ └── main/
+     ├── java/
+     │   └── ...
+     │       ├── controller/
+     │       ├── service/
+     │       ├── repository/
+     │       ├── entity/
+     │       ├── dto/
+     │       ├── exception/
+     │       └── security/
+     └── resources/
+         └── application.properties
+
+twitter-front/
+ └── React frontend application
+```
+
+## What I Practiced
+
+* Designing RESTful APIs with Spring Boot
+* Implementing controller-service-repository architecture
+* Modeling relational database entities with JPA
+* Managing user, tweet, comment, like, and retweet relationships
+* Applying validation rules and exception handling
+* Using Spring Security for authentication-related flows
+* Connecting a React frontend to a Spring Boot backend
+* Handling CORS issues between frontend and backend
+* Structuring a full-stack project for maintainability
+
+## Getting Started
+
+### Prerequisites
+
+Make sure you have the following installed:
+
+* Java 17+
+* Maven
+* PostgreSQL
+* Node.js and npm
+
+### Backend Setup
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/emreyildirim-33/spring-boot-twitter-clone.git
+cd spring-boot-twitter-clone
+```
+
+2. Configure PostgreSQL database settings in `application.properties`.
+
+Example:
+
+```properties
+spring.datasource.url=jdbc:postgresql://localhost:5432/twitter_clone
+spring.datasource.username=your_username
+spring.datasource.password=your_password
+spring.jpa.hibernate.ddl-auto=update
+```
+
+3. Run the backend:
+
+```bash
+./mvnw spring-boot:run
+```
+
+The backend will run on:
+
+```text
+http://localhost:3000
+```
+
+### Frontend Setup
+
+1. Go to the frontend folder:
+
+```bash
+cd twitter-front
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Start the frontend:
+
+```bash
+npm start
+```
+
+## API Testing
+
+The repository includes an `api.http` file that can be used to test backend endpoints with an HTTP client.
+
+You can also test the endpoints using Postman or similar tools.
+
+## Notes
+
+This project was developed as a hands-on full-stack training project.
+The main focus was not cloning Twitter visually, but practicing backend architecture, REST API design, relational data modeling, authentication flow, and frontend-backend communication.
+
+## Repository
+
+GitHub: https://github.com/emreyildirim-33/spring-boot-twitter-clone
